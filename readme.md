@@ -4,7 +4,19 @@ A silly package to support reading in an .envfile
 **Usage**
 ```
 go get github.com/pete-dot-m/go-envfile
+
 ```
+The .env file, or any other file used, should be a standard text-based file with one name=value pair per line...
+```text
+API_KEY=xcvsd98734asdfio3u32234
+EMAIL=foo@bar.com
+BACKGROUND_COLOR=0xff00ff
+```
+Blank lines are skipped to allow some formatting and organization, and basic validation is done on the pair.<br/> 
+One item of note is that if the RHS of the assignment is quoted, then the resultant environment variable value will also be quoted.
+
+---
+
 Import as usual, and then call LoadEnv to populate environment variables, preferably before they're needed...
 ```golang
 import (
