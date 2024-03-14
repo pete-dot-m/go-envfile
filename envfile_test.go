@@ -68,6 +68,7 @@ func prepare(t *testing.T, fileName string, tests []struct {
 		writer.WriteString(fmt.Sprintf("%s=%s\n", tt.wantKey, tt.wantValue))
 	}
 	writer.Flush()
+	file.Close()
 }
 
 func cleanup(t *testing.T, fileName string) {
