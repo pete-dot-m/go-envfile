@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+// LoadEnv reads in the .envfile in the same directory (default), or the file specified
+// and sets each name=value pair in the current environment.
+// Returns an error or nil on sucess.
 func LoadEnv(envFile ...string) error {
 	var envFilePath string
 	len := len(envFile)
@@ -23,6 +26,9 @@ func LoadEnv(envFile ...string) error {
 	return loadEnvFromFile(envFilePath)
 }
 
+// loadEnvFromFile handles scanning the envfile and sets each name=value in the
+// current process environment.
+// Returns an error or nil on success.
 func loadEnvFromFile(envFile string) error {
 	// load the file
 	file, err := os.Open(envFile)
@@ -52,10 +58,10 @@ func loadEnvFromFile(envFile string) error {
 		}
 
 		// set the values
-		key, value := parts[0], parts[1]
-		log.Println(fmt.Sprintf("envfile.LoadEnv: setting environment variable: %s", key))
-		if err := os.Setenv(key, value); err != nil {
-			return errors.New(fmt.Sprintf("Unable to set env var %s=%s: %s", key, value, err.Error()))
+		name, value := parts[0], parts[1]
+		log.Println(fmt.Sprintf("envfile.LoadEnv: setting environment variable: %s", name))
+		if err := os.Setenv(name, value); err != nil {
+			return errors.New(fmt.Sprintf("Unable to set env var %s=%s: %s", name, value, err.Error()))
 		}
 	}
 
