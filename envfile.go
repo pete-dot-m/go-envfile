@@ -59,7 +59,6 @@ func loadEnvFromFile(envFile string) error {
 
 		// set the values
 		name, value := parts[0], parts[1]
-		log.Println(fmt.Sprintf("envfile.LoadEnv: setting environment variable: %s", name))
 		if err := os.Setenv(name, value); err != nil {
 			return errors.New(fmt.Sprintf("Unable to set env var %s=%s: %s", name, value, err.Error()))
 		}
